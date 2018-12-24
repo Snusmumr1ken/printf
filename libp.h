@@ -31,13 +31,10 @@ typedef struct      s_format
 
 
 /* структура для хранения юникода при выводе через строку*/
-typedef struct		s_uni
+typedef struct  s_unicode
 {
-	unsigned int	b1;
-	unsigned int	b2;
-	unsigned int	b3;
-	unsigned int	b4;
-}					t_uni;
+	char		byte[4];
+}				t_unicode;
 
 
 int					print_part_of_format_str(int a, int b, const char *string);
@@ -49,8 +46,8 @@ void				manage_char(t_format *fmt);
 void				set_default(t_format *fmt);
 
 int					ft_printf(const char *format, ...);
-void				ft_putchar(unsigned int u);
-int					ft_putstr(char *str);
+int					ft_putchar(unsigned n);
+int					ft_putstr(char *str)
 int					ft_strlen(const char *str);
 int					ft_atoi(const char *str);
 char				*ft_itoa_base_signed(intmax_t value, int base);
