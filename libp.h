@@ -36,8 +36,8 @@ typedef struct  s_unicode
 	char		byte[4];
 }				t_unicode;
 
-
-int					print_part_of_format_str(int a, int b, const char *string);
+int					end_of_format(char c);
+int					print_part_of_format_str(int a, const char *string);
 void				print_format(t_format format);
 
 int					set_format(const char *format, int start, va_list formats,
@@ -47,7 +47,7 @@ void				set_default(t_format *fmt);
 
 int					ft_printf(const char *format, ...);
 int					ft_putchar(unsigned n);
-int					ft_putstr(char *str)
+int					ft_putstr(char *str);
 int					ft_strlen(const char *str);
 int					ft_atoi(const char *str);
 char				*ft_itoa_base_signed(intmax_t value, int base);

@@ -5,7 +5,7 @@
 #                                                    #
 ######################################################
 
-SRC		= main.c
+SRC		= work_with_unicode.c ft_printf.c useful_functions.c
 
 OBJ		= $(SRC:.c=.o)
 
