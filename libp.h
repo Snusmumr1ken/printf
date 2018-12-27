@@ -29,19 +29,16 @@ typedef struct      s_format
 }                   t_format;
 
 
-
 /* структура для хранения юникода при выводе через строку*/
 typedef struct  s_unicode
 {
 	char		byte[4];
 }				t_unicode;
 
-int					end_of_format(char c);
-int					print_part_of_format_str(int a, const char *string);
+int					print_part_of_format_str(int a, const char *string, int *size_of_output);
 void				print_format(t_format format);
 
-int					set_format(const char *format, int start, va_list formats,
-																	int *size);
+int					set_format(const char *format, int start, va_list formats);
 void				manage_char(t_format *fmt);
 void				set_default(t_format *fmt);
 
