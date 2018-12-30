@@ -35,7 +35,6 @@ typedef struct  s_unicode
 	char		byte[4];
 }				t_unicode;
 
-int					print_part_of_format_str(int a, const char *string, int *size_of_output);
 void				print_format(t_format format);
 
 int					set_format(const char *format, int i, va_list formats);
