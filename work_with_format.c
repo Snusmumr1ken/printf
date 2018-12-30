@@ -72,6 +72,19 @@ static int			check_and_set_sign(char c, t_format *fmt)
 	return (0);
 }
 
+
+void				print_format(t_format fmt)
+{
+	printf("type: %c\n", fmt.type);
+	printf("plus: %i\n", fmt.sign_plus);
+	printf("minus: %i\n", fmt.sign_minus);
+	printf("or: %i\n", fmt.sign_or);
+	printf("space: %i\n", fmt.sign_space);
+	printf("width: %i\n", fmt.width);
+	printf("prec: %i\n\n", fmt.precision);
+}
+
+
 int					set_format(const char *format, int i, va_list formats)
 {
 	t_format	fmt;
@@ -81,11 +94,15 @@ int					set_format(const char *format, int i, va_list formats)
 	{
 		if (check_and_set_sign(format[i], &fmt))
 			i++;
-		if (format[i] == '.')
-			i = set_width_or_prec(format, i, &fmt, 2); /*last parametr shows that we want to set prec*/
+		if (format[i] == '.') /*last parametr shows that we want to set prec*/
+			i = set_width_or_prec(format, i + 1, &fmt, 2);
+		if (format[i] >= 49 && format[i] <= 57)
+			i = set_width_or_prec(format, i, &fmt, 1);
 	}
 	fmt = fmt;
 	formats = formats + 1 - 1;
 	fmt.type = format[i];
+	print_format(fmt);
+	i++;
 	return (i);
 }

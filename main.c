@@ -1,11 +1,7 @@
 #include "libp.h"
-#include <stdio.h>
 
 int		main(int argc, char **argv)
 {
-	int size;
-
-	size = printf("α %%%%%%%% kekeke\n");
-	//printf("my size = %d\n", size);
+	ft_printf("%+- #014.32d%012.2+- d\n");
 	return (0);
 }

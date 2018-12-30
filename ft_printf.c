@@ -14,7 +14,10 @@ int		ft_printf(const char *format, ...)
 	while (i < len_of_format)
 	{
 		if (format[i] == '%')
+		{
 			i = set_format(format, i + 1, ap);
+			continue;
+		}
 		write(1, &format[i], 1);
 		i++;
 		size_of_output++;
