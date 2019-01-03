@@ -17,5 +17,7 @@ int			what_to_manage(t_format fmt, va_list *ap)
 	output_size = 0;
 	if (fmt.type == 'c')
 		output_size = manage_char(fmt, ap);
+	if (fmt.type == 's')
+		output_size = manage_string(fmt, ap);
 	return (output_size);
 }

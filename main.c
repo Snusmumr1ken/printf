@@ -4,9 +4,9 @@ int		main(int argc, char **argv)
 {
 	int size;
 
-	size = ft_printf("%c\n%10c\n", 'a', 'b');
+	size = ft_printf("%12s\n", "zap");
 	printf("my size = %d\n", size);
-	size = printf("%c\n%10c\n", 'a', 'b');
+	size = printf("%12s\n", "zap");
 	printf("standart size = %d\n", size);
 	return (0);
 }
