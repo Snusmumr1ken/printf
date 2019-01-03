@@ -3,6 +3,7 @@
 int		ft_printf(const char *format, ...)
 {
 	va_list		ap;
+	t_format	fmt;
 	int			size_of_output;
 	int 		i;
 	int 		len_of_format;
@@ -15,7 +16,8 @@ int		ft_printf(const char *format, ...)
 	{
 		if (format[i] == '%')
 		{
-			i = set_format(format, i + 1, ap);
+			i = set_format(format, i + 1, &fmt);
+			size_of_output += what_to_manage(fmt, &ap);
 			continue;
 		}
 		write(1, &format[i], 1);

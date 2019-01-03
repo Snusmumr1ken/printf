@@ -2,6 +2,11 @@
 
 int		main(int argc, char **argv)
 {
-	ft_printf("%+- #014.32d%012.2+- d\n");
+	int size;
+
+	size = ft_printf("%c\n%10c\n", 'a', 'b');
+	printf("my size = %d\n", size);
+	size = printf("%c\n%10c\n", 'a', 'b');
+	printf("standart size = %d\n", size);
 	return (0);
 }

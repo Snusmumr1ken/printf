@@ -19,7 +19,7 @@ typedef struct      s_format
     int 			sign_plus;
 	int 			sign_minus;
 	int 			sign_null;
-	int 			sign_or;
+	int 			sign_hash;
 	int 			sign_space;
 
     int             width;
@@ -37,8 +37,11 @@ typedef struct  s_unicode
 
 void				print_format(t_format format);
 
-int					set_format(const char *format, int i, va_list formats);
-void				manage_char(t_format *fmt);
+int					what_to_manage(t_format fmt, va_list *ap);
+int					manage_char(t_format fmt, va_list *ap);
+
+
+int					set_format(const char *format, int i, t_format *fmt);
 
 int					ft_printf(const char *format, ...);
 int					ft_putchar(unsigned n);

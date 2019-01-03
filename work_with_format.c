@@ -16,7 +16,7 @@ static t_format		set_default(void)
 	fmt.sign_minus = 0;
 	fmt.sign_plus = 0;
 	fmt.sign_null = 0;
-	fmt.sign_or = 0;
+	fmt.sign_hash = 0;
 	fmt.sign_space = 0;
 	fmt.width = -999;
 	fmt.precision = -1;
@@ -61,7 +61,7 @@ static int			check_and_set_sign(char c, t_format *fmt)
 	}
 	if (c == '#')
 	{
-		fmt->sign_or = 1;
+		fmt->sign_hash = 1;
 		return (1);
 	}
 	if (c == ' ')
@@ -78,31 +78,27 @@ void				print_format(t_format fmt)
 	printf("type: %c\n", fmt.type);
 	printf("plus: %i\n", fmt.sign_plus);
 	printf("minus: %i\n", fmt.sign_minus);
-	printf("or: %i\n", fmt.sign_or);
+	printf("or: %i\n", fmt.sign_hash);
 	printf("space: %i\n", fmt.sign_space);
 	printf("width: %i\n", fmt.width);
 	printf("prec: %i\n\n", fmt.precision);
 }
 
 
-int					set_format(const char *format, int i, va_list formats)
+int					set_format(const char *format, int i, t_format *fmt)
 {
-	t_format	fmt;
-
-	fmt = set_default();
+	*fmt = set_default();
 	while (is_type(format[i]) == 0)
 	{
-		if (check_and_set_sign(format[i], &fmt))
+		if (check_and_set_sign(format[i], fmt))
 			i++;
 		if (format[i] == '.') /*last parametr shows that we want to set prec*/
-			i = set_width_or_prec(format, i + 1, &fmt, 2);
+			i = set_width_or_prec(format, i + 1, fmt, 2);
 		if (format[i] >= 49 && format[i] <= 57)
-			i = set_width_or_prec(format, i, &fmt, 1);
+			i = set_width_or_prec(format, i, fmt, 1);
 	}
-	fmt = fmt;
-	formats = formats + 1 - 1;
-	fmt.type = format[i];
-	print_format(fmt);
+	fmt->type = format[i];
+	//print_format(*fmt);
 	i++;
 	return (i);
 }
