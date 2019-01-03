@@ -3,7 +3,6 @@
 int			manage_char(t_format fmt, va_list *ap)
 {
 	int		size_of_output;
-	int 	i;
 	char	c;
 
 	c = (char)va_arg(*ap, int);
@@ -12,12 +11,11 @@ int			manage_char(t_format fmt, va_list *ap)
 		write(1, &c, 1);
 	if (fmt.width != -999)
 	{
-		i = 0;
-		while (i < fmt.width - 1)
+		while (size_of_output < fmt.width)
 		{
-			write(1, " ", 1);
+			(fmt.sign_null == 1) ? (write(1, "0", 1)) :
+									(write(1, " ", 1));
 			size_of_output++;
-			i++;
 		}
 	}
 	if (fmt.sign_minus == 0)

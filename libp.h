@@ -9,11 +9,10 @@
 
 #include <stdio.h>
 
+typedef enum { none, hh, h, l, ll} e_len;
+
 typedef struct      s_format
 {
-    char            *str;
-    int				num;
-
     char            type;
 
     int 			sign_plus;
@@ -24,8 +23,7 @@ typedef struct      s_format
 
     int             width;
     int             precision;
-
-    int				output_size;
+    e_len			len;
 }                   t_format;
 
 
