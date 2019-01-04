@@ -40,7 +40,8 @@ int					manage_char(t_format fmt, va_list *ap);
 int					manage_string(t_format fmt, va_list *ap);
 
 
-int					set_format(const char *format, int i, t_format *fmt);
+int					set_format(const char *format, int i,
+								t_format *fmt, va_list *ap);
 
 int					ft_printf(const char *format, ...);
 int					ft_putchar(unsigned n);

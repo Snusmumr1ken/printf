@@ -16,7 +16,7 @@ int		ft_printf(const char *format, ...)
 	{
 		if (format[i] == '%')
 		{
-			i = set_format(format, i + 1, &fmt);
+			i = set_format(format, i + 1, &fmt, &ap);
 			size_of_output += what_to_manage(fmt, &ap);
 			continue;
 		}

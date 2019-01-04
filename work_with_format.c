@@ -85,13 +85,24 @@ void				print_format(t_format fmt)
 }
 
 
-int					set_format(const char *format, int i, t_format *fmt)
+int					set_format(const char *format, int i,
+								t_format *fmt, va_list *ap)
 {
 	*fmt = set_default();
 	while (is_type(format[i]) == 0)
 	{
+		if (format[i] == '*')
+		{
+			fmt->width = va_arg(*ap, int);
+			i++;
+		}
 		if (check_and_set_sign(format[i], fmt))
 			i++;
+		if (format[i] == '.' && format[i + 1] == '*')
+		{
+			fmt->precision = va_arg(*ap, int);
+			i += 2;
+		}
 		if (format[i] == '.') /*last parametr shows that we want to set prec*/
 			i = set_width_or_prec(format, i + 1, fmt, 2);
 		if (format[i] >= 49 && format[i] <= 57)
@@ -99,6 +110,5 @@ int					set_format(const char *format, int i, t_format *fmt)
 	}
 	fmt->type = format[i];
 	//print_format(*fmt);
-	i++;
-	return (i);
+	return (++i);
 }
