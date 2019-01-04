@@ -1,14 +1,10 @@
 #include "libp.h"
 
-int		main(int argc, char **argv)
+int		main()
 {
-	int size;
+	int something = 10231123;
 
-	size = ft_printf("%%\n");
-	printf("my size = %d\n", size);
-
-
-	size = printf("%%\n");
-	printf("standart size = %d\n", size);
+	ft_printf("%20p\n", &something);
+	printf("% -20p\n", &something);
 	return (0);
 }

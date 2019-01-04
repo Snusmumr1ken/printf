@@ -20,9 +20,8 @@ int			what_to_manage(t_format fmt, va_list *ap)
 	if (fmt.type == 's')
 		output_size = manage_string(fmt, ap);
 	if (fmt.type == '%')
-	{
-		write(1, "%", 1);
-		output_size++;
-	}
+		output_size = write(1, "%", 1);
+	if (fmt.type == 'p')
+		output_size = manage_pointer(ap);
 	return (output_size);
 }
