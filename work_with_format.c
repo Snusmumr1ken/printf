@@ -1,14 +1,5 @@
 #include "libp.h"
 
-static int			is_type(char c)
-{
-	if (c == 'c' || c == 's' || c == 'p' || c == 'd' || c == 'i' ||
-		c == 'o' || c == 'u' || c == 'x' || c == 'X' || c == 'f' ||
-		c == '%')
-		return (1);
-	return (0);
-}
-
 static t_format		set_default(void)
 {
 	t_format fmt;
@@ -20,6 +11,7 @@ static t_format		set_default(void)
 	fmt.sign_space = 0;
 	fmt.width = -999;
 	fmt.precision = -1;
+	fmt.len = 0;
 	return (fmt);
 }
 
@@ -72,18 +64,36 @@ static int			check_and_set_sign(char c, t_format *fmt)
 	return (0);
 }
 
-
-void				print_format(t_format fmt)
+static int					check_and_set_len(const char *str,
+									int i, t_format *fmt)
 {
-	printf("type: %c\n", fmt.type);
-	printf("plus: %i\n", fmt.sign_plus);
-	printf("minus: %i\n", fmt.sign_minus);
-	printf("or: %i\n", fmt.sign_hash);
-	printf("space: %i\n", fmt.sign_space);
-	printf("width: %i\n", fmt.width);
-	printf("prec: %i\n\n", fmt.precision);
+	if (str[i] == 'h' && str[i + 1] == 'h')
+	{
+		fmt->len = 1;
+		return (2);
+	}
+	if (str[i] == 'h')
+	{
+		fmt->len = 2;
+		return (1);
+	}
+	if (str[i] == 'l' && str[i + 1] == 'l')
+	{
+		fmt->len = 3;
+		return (2);
+	}
+	if (str[i] == 'l')
+	{
+		fmt->len = 4;
+		return (1);
+	}
+	if (str[i] == 'L')
+	{
+		fmt->len = 5;
+		return (1);
+	}
+	return (0);
 }
-
 
 int					set_format(const char *format, int i,
 								t_format *fmt, va_list *ap)
@@ -96,8 +106,8 @@ int					set_format(const char *format, int i,
 			fmt->width = va_arg(*ap, int);
 			i++;
 		}
-		if (check_and_set_sign(format[i], fmt))
-			i++;
+		i += check_and_set_sign(format[i], fmt);
+		i += check_and_set_len(format, i, fmt);
 		if (format[i] == '.' && format[i + 1] == '*')
 		{
 			fmt->precision = va_arg(*ap, int);
@@ -109,6 +119,5 @@ int					set_format(const char *format, int i,
 			i = set_width_or_prec(format, i, fmt, 1);
 	}
 	fmt->type = format[i];
-	//print_format(*fmt);
 	return (++i);
 }

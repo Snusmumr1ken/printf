@@ -1,5 +1,14 @@
 #include "libp.h"
 
+int			is_type(char c)
+{
+	if (c == 'c' || c == 's' || c == 'p' || c == 'd' || c == 'i' ||
+		c == 'o' || c == 'u' || c == 'x' || c == 'X' || c == 'f' ||
+		c == '%')
+		return (1);
+	return (0);
+}
+
 int			ft_strlen(const char *str)
 {
 	int		size;
@@ -22,5 +31,7 @@ int			what_to_manage(t_format fmt, va_list *ap)
 		output_size = write(1, "%", 1);
 	if (fmt.type == 'p')
 		output_size = manage_pointer(fmt, ap);
+	if (fmt.type == 'd' || fmt.type == 'i')
+		output_size = manage_decimal(fmt, ap);
 	return (output_size);
 }

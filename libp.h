@@ -9,7 +9,7 @@
 
 #include <stdio.h>
 
-typedef enum { none, hh, h, l, ll} e_len;
+typedef enum {none, hh, h, ll, l, L} e_len;
 
 typedef struct      s_format
 {
@@ -33,13 +33,15 @@ typedef struct  s_unicode
 	char		byte[4];
 }				t_unicode;
 
+
+int					is_type(char c);
 void				print_format(t_format format);
 
 int					what_to_manage(t_format fmt, va_list *ap);
 int					manage_char(t_format fmt, va_list *ap);
 int					manage_string(t_format fmt, va_list *ap);
 int					manage_pointer(t_format fmt, va_list *ap);
-
+int					manage_decimal(t_format fmt, va_list *ap);
 
 int					set_format(const char *format, int i,
 								t_format *fmt, va_list *ap);
