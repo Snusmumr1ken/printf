@@ -4,7 +4,7 @@ int		main()
 {
 	int something = 10231123;
 
-	ft_printf("%20p\n", &something);
-	printf("% -20p\n", &something);
+	ft_printf("% p\n", &something);
+	printf("% p\n", &something);
 	return (0);
 }

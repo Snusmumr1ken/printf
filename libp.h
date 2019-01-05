@@ -38,7 +38,7 @@ void				print_format(t_format format);
 int					what_to_manage(t_format fmt, va_list *ap);
 int					manage_char(t_format fmt, va_list *ap);
 int					manage_string(t_format fmt, va_list *ap);
-int					manage_pointer(va_list *ap);
+int					manage_pointer(t_format fmt, va_list *ap);
 
 
 int					set_format(const char *format, int i,
