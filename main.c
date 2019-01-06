@@ -2,9 +2,9 @@
 
 int		main()
 {
-	int something = 10231123;
+	unsigned long long something = 18446744073709551615;
 
-	ft_printf("% p\n", &something);
-	printf("% p\n", &something);
+	printf("%s\n", ft_itoa_base_unsigned(something, 10));
+	//printf("%o\n", something);
 	return (0);
 }

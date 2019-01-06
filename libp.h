@@ -51,7 +51,8 @@ int					ft_putchar(unsigned n);
 int					ft_putstr(char *str);
 int					ft_strlen(const char *str);
 int					ft_atoi(const char *str);
-char				*ft_itoa_base_signed(intmax_t value, int base);
-char				*ft_itoa_base_unsigned(uintmax_t value, int base);
+char				*ft_itoa_base_signed(long long value, int base);
+char				*ft_itoa_base_unsigned(unsigned long long value,
+												int base);
 
 #endif
