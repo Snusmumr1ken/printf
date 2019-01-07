@@ -57,24 +57,11 @@ static int			write_padding(t_format fmt, char *string)
 	return (output_size);
 }
 
-int					manage_decimal(t_format fmt, va_list *ap)
+static int			actual_output(t_format fmt, char *string)
 {
-	int 		output_size;
-	long long	num;
-	char 		*string;
+	int output_size;
 
 	output_size = 0;
-	if (fmt.len == hh)
-		num = (signed char)va_arg(*ap, int);
-	else if (fmt.len == h)
-		num = (signed short)va_arg(*ap, int);
-	else if (fmt.len == ll)
-		num = va_arg(*ap, long long);
-	else if (fmt.len == l)
-		num = va_arg(*ap, long);
-	else
-		num = va_arg(*ap, int);
-	string = ft_itoa_base_signed(num, 10);
 	if (fmt.sign_minus == 0)
 	{
 		if (fmt.sign_null == 1)
@@ -91,4 +78,23 @@ int					manage_decimal(t_format fmt, va_list *ap)
 		output_size += write_padding(fmt, string);
 	}
 	return (output_size);
+}
+
+int					manage_decimal(t_format fmt, va_list *ap)
+{
+	long long	num;
+	char 		*string;
+
+	if (fmt.len == hh)
+		num = (signed char)va_arg(*ap, int);
+	else if (fmt.len == h)
+		num = (signed short)va_arg(*ap, int);
+	else if (fmt.len == ll)
+		num = va_arg(*ap, long long);
+	else if (fmt.len == l)
+		num = va_arg(*ap, long);
+	else
+		num = va_arg(*ap, int);
+	string = ft_itoa_base_signed(num, 10);
+	return (actual_output(fmt, string));
 }
