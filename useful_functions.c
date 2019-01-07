@@ -33,6 +33,8 @@ int			what_to_manage(t_format fmt, va_list *ap)
 		output_size = manage_pointer(fmt, ap);
 	if (fmt.type == 'd' || fmt.type == 'i')
 		output_size = manage_decimal(fmt, ap);
+	if (fmt.type == 'u')
+		output_size = manage_unsigned(fmt, ap);
 	return (output_size);
 }
 

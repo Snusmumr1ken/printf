@@ -1,17 +1,5 @@
 #include "libp.h"
 
-/*static int			write_prefix(t_format fmt, char *string)
-{
-	int output_size;
-
-	output_size = 0;
-	if (fmt.sign_plus == 1)
-		output_size += write(1, '+', 1);
-	else if (fmt.sign_space == 1)
-		output_size += write(1, ' ', 1);
-	return (output_size);
-}*/
-
 static int			write_value(t_format fmt, char *string)
 {
 	int output_size;
@@ -46,7 +34,7 @@ static int			write_padding(t_format fmt, char *string)
 	return (output_size);
 }
 
-int					manage_decimal(t_format fmt, va_list *ap)
+int					manage_unsigned(t_format fmt, va_list *ap)
 {
 	int 				output_size;
 	unsigned long long	num;

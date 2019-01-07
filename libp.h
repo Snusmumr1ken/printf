@@ -42,6 +42,7 @@ int					manage_char(t_format fmt, va_list *ap);
 int					manage_string(t_format fmt, va_list *ap);
 int					manage_pointer(t_format fmt, va_list *ap);
 int					manage_decimal(t_format fmt, va_list *ap);
+int					manage_unsigned(t_format fmt, va_list *ap);
 
 int					set_format(const char *format, int i,
 								t_format *fmt, va_list *ap);
