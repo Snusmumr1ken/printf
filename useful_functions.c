@@ -35,6 +35,8 @@ int			what_to_manage(t_format fmt, va_list *ap)
 		output_size = manage_decimal(fmt, ap);
 	if (fmt.type == 'u')
 		output_size = manage_unsigned(fmt, ap);
+	if (fmt.type == 'o')
+		output_size = manage_octal(fmt, ap);
 	return (output_size);
 }
 
