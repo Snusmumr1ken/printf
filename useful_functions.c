@@ -4,7 +4,7 @@ int			is_type(char c)
 {
 	if (c == 'c' || c == 's' || c == 'p' || c == 'd' || c == 'i' ||
 		c == 'o' || c == 'u' || c == 'x' || c == 'X' || c == 'f' ||
-		c == '%')
+		c == '%' || c == 'b')
 		return (1);
 	return (0);
 }
@@ -37,6 +37,8 @@ int			what_to_manage(t_format fmt, va_list *ap)
 		output_size = manage_unsigned(fmt, ap);
 	if (fmt.type == 'o')
 		output_size = manage_octal(fmt, ap);
+	if (fmt.type == 'b')
+		output_size = manage_binary(fmt, ap);
 	return (output_size);
 }
 

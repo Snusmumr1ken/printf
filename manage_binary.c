@@ -68,8 +68,8 @@ static int			actual_output(t_format fmt, char *string)
 
 int					manage_binary(t_format fmt, va_list *ap)
 {
-	unsigned long long	num;
-	char 				*string;
+	unsigned	num;
+	char 		*string;
 
 	num = va_arg(*ap, unsigned);
 	string = ft_itoa_base_unsigned(num, 2);

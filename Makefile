@@ -11,7 +11,8 @@ SRC		=   work_with_unicode.c ft_printf.c \
             useful_functions.c work_with_format.c \
             manage_char.c manage_string.c \
             manage_pointer.c manage_decimal.c \
-            manage_unsigned.c manage_octal.c
+            manage_unsigned.c manage_octal.c \
+            manage_binary.c
 
 OBJ		= $(SRC:.c=.o)
 
