@@ -45,6 +45,7 @@ int					manage_decimal(t_format fmt, va_list *ap);
 int					manage_unsigned(t_format fmt, va_list *ap);
 int					manage_octal(t_format fmt, va_list *ap);
 int					manage_binary(t_format fmt, va_list *ap);
+int					manage_hex(t_format fmt, va_list *ap);
 
 int					set_format(const char *format, int i,
 								t_format *fmt, va_list *ap);

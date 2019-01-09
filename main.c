@@ -4,6 +4,7 @@ int		main()
 {
 	int value = 45;
 
-	ft_printf("%d - in binary - %b\n", value, (unsigned)value);
+	ft_printf("%#05x\n", value);
+	ft_printf("%#05X\n", value);
 	return (0);
 }

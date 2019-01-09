@@ -39,6 +39,8 @@ int			what_to_manage(t_format fmt, va_list *ap)
 		output_size = manage_octal(fmt, ap);
 	if (fmt.type == 'b')
 		output_size = manage_binary(fmt, ap);
+	if (fmt.type == 'x' || fmt.type == 'X')
+		output_size = manage_hex(fmt, ap);
 	return (output_size);
 }
 

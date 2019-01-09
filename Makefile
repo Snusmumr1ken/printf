@@ -12,7 +12,7 @@ SRC		=   work_with_unicode.c ft_printf.c \
             manage_char.c manage_string.c \
             manage_pointer.c manage_decimal.c \
             manage_unsigned.c manage_octal.c \
-            manage_binary.c
+            manage_binary.c manage_hex.c \
 
 OBJ		= $(SRC:.c=.o)
 
