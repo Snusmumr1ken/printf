@@ -41,6 +41,8 @@ int			what_to_manage(t_format fmt, va_list *ap)
 		output_size = manage_binary(fmt, ap);
 	if (fmt.type == 'x' || fmt.type == 'X')
 		output_size = manage_hex(fmt, ap);
+	/*if (fmt.type == 'f')
+		output_size = manage_float(fmt, ap);*/
 	return (output_size);
 }
 

@@ -1,10 +1,11 @@
 #include "libp.h"
 
-int		main()
+int main()
 {
-	int value = 45;
-
-	ft_printf("%#05x\n", value);
-	ft_printf("%#05X\n", value);
-	return (0);
+	char res[20];
+	float n = 233.999;
+	ftoa(n, res, 2);
+	ft_printf("\"%s\"\n", res);
+	printf("%.2f\n", n);
+	return 0;
 }
