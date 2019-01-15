@@ -57,7 +57,6 @@ int				manage_pointer(t_format fmt, va_list *ap)
 
 	output_size = 0;
 	buf = pointer_to_str(va_arg(*ap, void*));
-
 	if (fmt.sign_minus == 1)
 	{
 		output_size += write_value(fmt, buf);
@@ -68,5 +67,6 @@ int				manage_pointer(t_format fmt, va_list *ap)
 		output_size += write_padding(fmt, buf);
 		output_size += write_value(fmt, buf);
 	}
+	free(buf);
 	return (output_size);
 }

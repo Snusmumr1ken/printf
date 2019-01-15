@@ -1,11 +1,11 @@
 #include "libp.h"
 
-static int			write_prefix(t_format fmt)
+static int			write_prefix(t_format fmt, char *string)
 {
 	int output_size;
 
 	output_size = 0;
-	if (fmt.sign_hash == 1)
+	if (fmt.sign_hash == 1 && string[0] != '0')
 	{
 		output_size += (fmt.type == 'x') ?
 				write(1, "0x", 2) : write(1, "0X", 2);
@@ -39,7 +39,7 @@ static int			write_padding(t_format fmt, char *string)
 	output_size = 0;
 	while (output_size < fmt.width - str_len)
 	{
-		(fmt.sign_null == 1) ?
+		(fmt.sign_null == 1 && fmt.sign_minus == 0) ?
 		(write(1, "0", 1)) : (write(1, " ", 1));
 		output_size++;
 	}
@@ -54,15 +54,15 @@ static int			actual_output(t_format fmt, char *string)
 	if (fmt.sign_minus == 0)
 	{
 		if (fmt.sign_null == 1)
-			output_size += write_prefix(fmt);
+			output_size += write_prefix(fmt, string);
 		output_size += write_padding(fmt, string);
 		if (fmt.sign_null == 0)
-			output_size += write_prefix(fmt);
+			output_size += write_prefix(fmt, string);
 		output_size += write_value(fmt, string);
 	}
 	else
 	{
-		output_size += write_prefix(fmt);
+		output_size += write_prefix(fmt, string);
 		output_size += write_value(fmt, string);
 		output_size += write_padding(fmt, string);
 	}

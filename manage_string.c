@@ -6,10 +6,8 @@ static int			write_value(t_format fmt, char *string)
 	int str_len;
 
 	output_size = 0;
-
 	str_len = (fmt.precision != -1 && fmt.precision < ft_strlen(string)) ?
 			(fmt.precision) : (ft_strlen(string));
-
 	while (output_size < str_len)
 	{
 		write(1, &string[output_size], 1);
@@ -42,6 +40,8 @@ int					manage_string(t_format fmt, va_list *ap)
 
 	output_size = 0;
 	string = va_arg(*ap, char*);
+	if (!string)
+		return(write(1, "(null)", 6));
 	if (fmt.sign_minus == 1)
 	{
 		output_size += write_value(fmt, string);

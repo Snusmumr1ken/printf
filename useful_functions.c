@@ -28,12 +28,12 @@ int			what_to_manage(t_format fmt, va_list *ap)
 	if (fmt.type == 's')
 		output_size = manage_string(fmt, ap);
 	if (fmt.type == '%')
-		output_size = write(1, "%", 1);
+		output_size = manage_percent(fmt);
 	if (fmt.type == 'p')
 		output_size = manage_pointer(fmt, ap);
 	if (fmt.type == 'd' || fmt.type == 'i')
 		output_size = manage_decimal(fmt, ap);
-	if (fmt.type == 'u')
+	if (fmt.type == 'u' || fmt.type == 'U')
 		output_size = manage_unsigned(fmt, ap);
 	if (fmt.type == 'o')
 		output_size = manage_octal(fmt, ap);
@@ -41,8 +41,8 @@ int			what_to_manage(t_format fmt, va_list *ap)
 		output_size = manage_binary(fmt, ap);
 	if (fmt.type == 'x' || fmt.type == 'X')
 		output_size = manage_hex(fmt, ap);
-	/*if (fmt.type == 'f')
-		output_size = manage_float(fmt, ap);*/
+	if (fmt.type == 'f' || fmt.type == 'F')
+		output_size = write(1, "p", 1);
 	return (output_size);
 }
 

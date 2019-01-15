@@ -98,7 +98,9 @@ static int					check_and_set_len(const char *str,
 int					set_format(const char *format, int i,
 								t_format *fmt, va_list *ap)
 {
+	int prev;
 	*fmt = set_default();
+	prev = i;
 	while (is_type(format[i]) == 0)
 	{
 		if (format[i] == '*')
@@ -117,6 +119,11 @@ int					set_format(const char *format, int i,
 			i = set_width_or_prec(format, i + 1, fmt, 2);
 		if (format[i] >= 49 && format[i] <= 57)
 			i = set_width_or_prec(format, i, fmt, 1);
+		if (format[i] == '\0')
+		    exit(0);
+		if (prev == i)
+			i++;
+		prev = i;
 	}
 	fmt->type = format[i];
 	return (++i);
