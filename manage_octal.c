@@ -33,10 +33,11 @@ static int			write_padding(t_format fmt, char *string)
 	str_len = (fmt.sign_hash == 1) ?
 			(ft_strlen(string) + 1) : ft_strlen(string);
 	str_len = (fmt.precision > str_len) ? fmt.precision : str_len;
+	str_len = (ft_strlen(string) == 1 && string[0] == '0') ? 0 : str_len;
 	output_size = 0;
 	while (output_size < fmt.width - str_len)
 	{
-		(fmt.sign_null == 1) ?
+		(fmt.sign_null == 1 && fmt.sign_minus == 0) ?
 		(write(1, "0", 1)) : (write(1, " ", 1));
 		output_size++;
 	}

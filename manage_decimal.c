@@ -50,7 +50,8 @@ static int			write_padding(t_format fmt, char *string)
 		str_len++;
 	while (output_size < fmt.width - str_len)
 	{
-		(fmt.sign_null == 1) ?
+		(fmt.sign_null == 1 && fmt.sign_minus == 0 &&
+		((fmt.precision != -1 && fmt.precision < ft_strlen(string)) || fmt.precision == -1)) ?
 		(write(1, "0", 1)) : (write(1, " ", 1));
 		output_size++;
 	}
