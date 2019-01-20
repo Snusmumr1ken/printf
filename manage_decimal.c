@@ -104,12 +104,13 @@ int					manage_decimal(t_format fmt, va_list *ap)
 		num = (char)(va_arg(*ap, int));
 	else if (fmt.len == h)
 		num = (short)va_arg(*ap, int);
-	else if (fmt.len == ll)
+	else if (fmt.len == ll || fmt.len == j || fmt.len == z)
 		num = va_arg(*ap, long long);
 	else if (fmt.len == l)
 		num = va_arg(*ap, long);
 	else
 		num = va_arg(*ap, int);
+	//printf ("num = %lld\n", num);
 	string = ft_itoa_base_signed(num, 10);
 	return (actual_output(fmt, string));
 }

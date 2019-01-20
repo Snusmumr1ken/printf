@@ -76,6 +76,7 @@ static int			actual_output(t_format fmt, char *string)
 		output_size += write_value(fmt, string);
 		output_size += write_padding(fmt, string);
 	}
+	free(string);
 	return (output_size);
 }
 

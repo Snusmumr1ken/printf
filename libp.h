@@ -21,7 +21,7 @@
 
 #include <stdio.h>
 
-typedef enum {none, hh, h, ll, j, l, L} e_len;
+typedef enum {none, hh, h, ll, j, l, L, z} e_len;
 
 typedef struct      s_format
 {

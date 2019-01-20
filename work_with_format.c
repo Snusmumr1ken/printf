@@ -108,6 +108,11 @@ static int					check_and_set_len(const char *str,
 		fmt->len = L;
 		return (1);
 	}
+	if (str[i] == 'z')
+	{
+		fmt->len = z;
+		return (1);
+	}
 	return (0);
 }
 

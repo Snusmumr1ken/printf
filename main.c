@@ -2,7 +2,7 @@
 
 int main(void)
 {
-	printf("%jx\n", 4294967296);
-	ft_printf("%jx\n", 4294967296);
+	printf("%zj", 9223372036854775807);
+	ft_printf("%zj", 9223372036854775807);
 	return 0;
 }

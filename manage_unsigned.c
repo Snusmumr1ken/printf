@@ -55,9 +55,11 @@ int					manage_unsigned(t_format fmt, va_list *ap)
 	output_size = 0;
 	if (fmt.len == hh)
 		num = (unsigned char)va_arg(*ap, unsigned);
+	else if (fmt.len == h && fmt.type == 'U')
+		num = va_arg(*ap, unsigned long);
 	else if (fmt.len == h)
 		num = (unsigned short)va_arg(*ap, unsigned);
-	else if (fmt.len == ll)
+	else if (fmt.len == ll || fmt.len == j || fmt.type == 'U')
 		num = va_arg(*ap, unsigned long long);
 	else if (fmt.len == l)
 		num = va_arg(*ap, unsigned long);
@@ -74,5 +76,6 @@ int					manage_unsigned(t_format fmt, va_list *ap)
 		output_size += write_value(fmt, string);
 		output_size += write_padding(fmt, string);
 	}
+	free(string);
 	return (output_size);
 }

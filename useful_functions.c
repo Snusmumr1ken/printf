@@ -16,7 +16,7 @@ int			is_type(char c)
 {
 	if (c == 'c' || c == 's' || c == 'p' || c == 'd' || c == 'i' ||
 		c == 'o' || c == 'u' || c == 'x' || c == 'X' || c == 'f' ||
-		c == '%' || c == 'b')
+		c == '%' || c == 'b' || c == 'U')
 		return (1);
 	return (0);
 }
@@ -60,10 +60,10 @@ int			what_to_manage(t_format fmt, va_list *ap)
 
 char	*ft_itoa_base_signed(long long value, int base)
 {
-	char 		*s;
-	long long	n;
-	int			sign;
-	int			i;
+	char 				*s;
+	unsigned long long	n;
+	int					sign;
+	int					i;
 
 	n = (value < 0) ? -value : value;
 	sign = (value < 0 && base == 10) ? -1 : 0;
