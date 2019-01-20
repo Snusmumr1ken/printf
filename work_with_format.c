@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   work_with_format.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anyvchyk <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/01/15 16:59:17 by anyvchyk          #+#    #+#             */
+/*   Updated: 2019/01/15 16:59:18 by anyvchyk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libp.h"
 
 static t_format		set_default(void)
@@ -69,27 +81,31 @@ static int					check_and_set_len(const char *str,
 {
 	if (str[i] == 'h' && str[i + 1] == 'h')
 	{
-		fmt->len = 1;
+		fmt->len = hh;
 		return (2);
 	}
 	if (str[i] == 'h')
 	{
-		fmt->len = 2;
+		fmt->len = h;
 		return (1);
 	}
 	if (str[i] == 'l' && str[i + 1] == 'l')
 	{
-		fmt->len = 3;
+		fmt->len = ll;
 		return (2);
+	}
+	if (str[i] == 'j')
+	{
+		fmt->len = j;
 	}
 	if (str[i] == 'l')
 	{
-		fmt->len = 4;
+		fmt->len = l;
 		return (1);
 	}
 	if (str[i] == 'L')
 	{
-		fmt->len = 5;
+		fmt->len = L;
 		return (1);
 	}
 	return (0);

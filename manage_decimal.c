@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   manage_decimal.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anyvchyk <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/01/15 16:57:50 by anyvchyk          #+#    #+#             */
+/*   Updated: 2019/01/15 16:57:52 by anyvchyk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libp.h"
 
 static int			write_prefix(t_format fmt, char *string)
@@ -45,6 +57,7 @@ static int			write_padding(t_format fmt, char *string)
 
 	str_len = (string[0] == '-') ? (ft_strlen(string) - 1) : ft_strlen(string);
 	str_len = (fmt.precision > str_len) ? fmt.precision : str_len;
+	str_len = (str_len == 1 && string[0] == '0' && fmt.precision == 0) ? 0 : str_len;
 	output_size = 0;
 	if (string[0] == '-' || fmt.sign_plus == 1 || fmt.sign_space == 1)
 		str_len++;
@@ -88,9 +101,9 @@ int					manage_decimal(t_format fmt, va_list *ap)
 	char 		*string;
 
 	if (fmt.len == hh)
-		num = (signed char)va_arg(*ap, int);
+		num = (char)(va_arg(*ap, int));
 	else if (fmt.len == h)
-		num = (signed short)va_arg(*ap, int);
+		num = (short)va_arg(*ap, int);
 	else if (fmt.len == ll)
 		num = va_arg(*ap, long long);
 	else if (fmt.len == l)

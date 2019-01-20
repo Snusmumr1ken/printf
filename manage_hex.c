@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   manage_hex.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anyvchyk <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/01/15 16:58:10 by anyvchyk          #+#    #+#             */
+/*   Updated: 2019/01/15 16:58:12 by anyvchyk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libp.h"
 
 static int			write_prefix(t_format fmt, char *string)
@@ -80,7 +92,7 @@ int					manage_hex(t_format fmt, va_list *ap)
 		num = (unsigned char)va_arg(*ap, unsigned);
 	else if (fmt.len == h)
 		num = (unsigned short)va_arg(*ap, unsigned);
-	else if (fmt.len == ll)
+	else if (fmt.len == ll || fmt.len == j)
 		num = va_arg(*ap, unsigned long long);
 	else if (fmt.len == l)
 		num = va_arg(*ap, unsigned long);

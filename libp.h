@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   libp.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anyvchyk <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/01/15 16:57:24 by anyvchyk          #+#    #+#             */
+/*   Updated: 2019/01/15 16:57:26 by anyvchyk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef LIBP_H
 # define LIBP_H
 # include <stdlib.h>
@@ -9,7 +21,7 @@
 
 #include <stdio.h>
 
-typedef enum {none, hh, h, ll, l, L} e_len;
+typedef enum {none, hh, h, ll, j, l, L} e_len;
 
 typedef struct      s_format
 {
