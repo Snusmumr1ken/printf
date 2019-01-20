@@ -46,7 +46,7 @@ static int			write_padding(t_format fmt, char *string)
 	int str_len;
 
 	str_len = (fmt.sign_hash == 1) ?
-			  (ft_strlen(string) + 2) : ft_strlen(string);
+			(ft_strlen(string) + 2) : ft_strlen(string);
 	str_len = (fmt.precision > str_len) ? fmt.precision : str_len;
 	str_len = (ft_strlen(string) == 1 && string[0] == '0') ? 0 : str_len;
 	output_size = 0;
@@ -86,8 +86,8 @@ static int			actual_output(t_format fmt, char *string)
 int					manage_hex(t_format fmt, va_list *ap)
 {
 	unsigned long long	num;
-	char 				*string;
-	int 				i;
+	char				*string;
+	int					i;
 
 	if (fmt.len == hh)
 		num = (unsigned char)va_arg(*ap, unsigned);

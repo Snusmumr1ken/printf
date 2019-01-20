@@ -140,7 +140,7 @@ int					set_format(const char *format, int i,
 			i = set_width_or_prec(format, i + 1, fmt, 2);
 		if (format[i] >= 49 && format[i] <= 57)
 			i = set_width_or_prec(format, i, fmt, 1);
-		if (format[i] == '\0')
+		if (format[i] == ft_strlen(format))
 		    exit(0);
 		if (prev == i)
 			i++;

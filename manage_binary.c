@@ -43,7 +43,7 @@ static int			write_padding(t_format fmt, char *string)
 	int str_len;
 
 	str_len = (fmt.sign_hash == 1) ?
-			  (ft_strlen(string) + 1) : ft_strlen(string);
+			(ft_strlen(string) + 1) : ft_strlen(string);
 	str_len = (fmt.precision > str_len) ? fmt.precision : str_len;
 	output_size = 0;
 	while (output_size < fmt.width - str_len)
@@ -82,7 +82,7 @@ static int			actual_output(t_format fmt, char *string)
 int					manage_binary(t_format fmt, va_list *ap)
 {
 	unsigned	num;
-	char 		*string;
+	char		*string;
 
 	num = va_arg(*ap, unsigned);
 	string = ft_itoa_base_unsigned(num, 2);

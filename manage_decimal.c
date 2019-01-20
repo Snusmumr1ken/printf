@@ -57,14 +57,16 @@ static int			write_padding(t_format fmt, char *string)
 
 	str_len = (string[0] == '-') ? (ft_strlen(string) - 1) : ft_strlen(string);
 	str_len = (fmt.precision > str_len) ? fmt.precision : str_len;
-	str_len = (str_len == 1 && string[0] == '0' && fmt.precision == 0) ? 0 : str_len;
+	str_len = (str_len == 1 && string[0] == '0' && fmt.precision == 0) ?
+			0 : str_len;
 	output_size = 0;
 	if (string[0] == '-' || fmt.sign_plus == 1 || fmt.sign_space == 1)
 		str_len++;
 	while (output_size < fmt.width - str_len)
 	{
 		(fmt.sign_null == 1 && fmt.sign_minus == 0 &&
-		((fmt.precision != -1 && fmt.precision < ft_strlen(string)) || fmt.precision == -1)) ?
+		((fmt.precision != -1 && fmt.precision < ft_strlen(string)) ||
+		fmt.precision == -1)) ?
 		(write(1, "0", 1)) : (write(1, " ", 1));
 		output_size++;
 	}
@@ -98,7 +100,7 @@ static int			actual_output(t_format fmt, char *string)
 int					manage_decimal(t_format fmt, va_list *ap)
 {
 	long long	num;
-	char 		*string;
+	char		*string;
 
 	if (fmt.len == hh)
 		num = (char)(va_arg(*ap, int));
@@ -110,7 +112,6 @@ int					manage_decimal(t_format fmt, va_list *ap)
 		num = va_arg(*ap, long);
 	else
 		num = va_arg(*ap, int);
-	//printf ("num = %lld\n", num);
 	string = ft_itoa_base_signed(num, 10);
 	return (actual_output(fmt, string));
 }

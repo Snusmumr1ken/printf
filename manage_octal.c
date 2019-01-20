@@ -83,7 +83,7 @@ static int			actual_output(t_format fmt, char *string)
 int					manage_octal(t_format fmt, va_list *ap)
 {
 	unsigned long long	num;
-	char 				*string;
+	char				*string;
 
 	if (fmt.len == hh)
 		num = (unsigned char)va_arg(*ap, unsigned);

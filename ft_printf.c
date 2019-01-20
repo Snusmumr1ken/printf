@@ -17,8 +17,8 @@ int		ft_printf(const char *format, ...)
 	va_list		ap;
 	t_format	fmt;
 	int			size_of_output;
-	int 		i;
-	int 		len_of_format;
+	int			i;
+	int			len_of_format;
 
 	i = 0;
 	size_of_output = 0;

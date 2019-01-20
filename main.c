@@ -2,7 +2,7 @@
 
 int main(void)
 {
-	printf("%zj", 9223372036854775807);
-	ft_printf("%zj", 9223372036854775807);
+	//printf("%O\n", LONG_MIN);
+	ft_printf("%O\n", LONG_MIN);
 	return 0;
 }
