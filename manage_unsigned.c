@@ -33,9 +33,9 @@ static int			write_padding(t_format fmt, char *string)
 	int str_len;
 
 	str_len = (ft_strlen(string) < fmt.precision) ?
-			  (fmt.precision) : (ft_strlen(string));
+			(fmt.precision) : (ft_strlen(string));
 	str_len = (fmt.sign_plus == 1 || fmt.sign_space == 1) ?
-			  (str_len + 1) : (str_len);
+			(str_len + 1) : (str_len);
 	output_size = 0;
 	while (output_size < fmt.width - str_len)
 	{
@@ -46,11 +46,30 @@ static int			write_padding(t_format fmt, char *string)
 	return (output_size);
 }
 
+static int			actual_output(t_format fmt, char *string)
+{
+	int output_size;
+
+	output_size = 0;
+	if (fmt.sign_minus == 0)
+	{
+		output_size += write_padding(fmt, string);
+		output_size += write_value(fmt, string);
+	}
+	else
+	{
+		output_size += write_value(fmt, string);
+		output_size += write_padding(fmt, string);
+	}
+	free(string);
+	return (output_size);
+}
+
 int					manage_unsigned(t_format fmt, va_list *ap)
 {
-	int 				output_size;
+	int					output_size;
 	unsigned long long	num;
-	char 				*string;
+	char				*string;
 
 	output_size = 0;
 	if (fmt.len == hh)
@@ -66,16 +85,5 @@ int					manage_unsigned(t_format fmt, va_list *ap)
 	else
 		num = va_arg(*ap, unsigned);
 	string = ft_itoa_base_unsigned(num, 10);
-	if (fmt.sign_minus == 0)
-	{
-		output_size += write_padding(fmt, string);
-		output_size += write_value(fmt, string);
-	}
-	else
-	{
-		output_size += write_value(fmt, string);
-		output_size += write_padding(fmt, string);
-	}
-	free(string);
-	return (output_size);
+	return (actual_output(fmt, string));
 }

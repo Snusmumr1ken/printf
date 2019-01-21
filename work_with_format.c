@@ -39,11 +39,8 @@ static int			set_width_or_prec(const char *str, int pos, t_format *fmt,
 		num = num * 10 + (str[pos] - 48);
 		pos++;
 	}
-
-	/* i've added "w_or_p" varaible to decide what we set.*/
-	/*If w_or_p == 1 it is width, else we set prec*/
-
-	(w_or_p == 1) ? (fmt->width = num) : (fmt->precision = num);
+	(w_or_p == 1) ? (fmt->width = num) :
+	(fmt->precision = num);
 	return (pos);
 }
 
@@ -77,7 +74,7 @@ static int			check_and_set_sign(char c, t_format *fmt)
 	return (0);
 }
 
-static int					check_and_set_len(const char *str,
+static int			check_and_set_len(const char *str,
 									int i, t_format *fmt)
 {
 	if (str[i] == 'h' && str[i + 1] == 'h')
@@ -85,15 +82,15 @@ static int					check_and_set_len(const char *str,
 		fmt->len = hh;
 		return (2);
 	}
-	if (str[i] == 'h')
-	{
-		fmt->len = h;
-		return (1);
-	}
 	if (str[i] == 'l' && str[i + 1] == 'l')
 	{
 		fmt->len = ll;
 		return (2);
+	}
+	if (str[i] == 'h')
+	{
+		fmt->len = h;
+		return (1);
 	}
 	if (str[i] == 'j')
 	{
@@ -118,9 +115,10 @@ static int					check_and_set_len(const char *str,
 }
 
 int					set_format(const char *format, int i,
-								t_format *fmt, va_list *ap)
+		t_format *fmt, va_list *ap)
 {
 	int prev;
+
 	*fmt = set_default();
 	prev = i;
 	while (is_type(format[i]) == 0)
@@ -137,7 +135,7 @@ int					set_format(const char *format, int i,
 			fmt->precision = va_arg(*ap, int);
 			i += 2;
 		}
-		if (format[i] == '.') /*last parametr shows that we want to set prec*/
+		if (format[i] == '.')
 			i = set_width_or_prec(format, i + 1, fmt, 2);
 		if (format[i] >= 49 && format[i] <= 57)
 			i = set_width_or_prec(format, i, fmt, 1);

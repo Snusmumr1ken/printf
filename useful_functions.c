@@ -58,9 +58,9 @@ int			what_to_manage(t_format fmt, va_list *ap)
 	return (output_size);
 }
 
-char	*ft_itoa_base_signed(long long value, int base)
+char		*ft_itoa_base_signed(long long value, int base)
 {
-	char 				*s;
+	char				*s;
 	unsigned long long	n;
 	int					sign;
 	int					i;
@@ -82,10 +82,10 @@ char	*ft_itoa_base_signed(long long value, int base)
 	return (s);
 }
 
-char	*ft_itoa_base_unsigned(unsigned long long value,
+char		*ft_itoa_base_unsigned(unsigned long long value,
 										int base)
 {
-	char 				*s;
+	char				*s;
 	unsigned long long	n;
 	int					i;
 

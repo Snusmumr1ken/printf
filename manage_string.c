@@ -34,7 +34,7 @@ static int			write_padding(t_format fmt, char *string)
 	int str_len;
 
 	str_len = (fmt.precision != -1 && fmt.precision < ft_strlen(string)) ?
-			  (fmt.precision) : (ft_strlen(string));
+			(fmt.precision) : (ft_strlen(string));
 	output_size = 0;
 	while (output_size < fmt.width - str_len)
 	{
@@ -48,12 +48,12 @@ static int			write_padding(t_format fmt, char *string)
 int					manage_string(t_format fmt, va_list *ap)
 {
 	int		output_size;
-	char 	*string;
+	char	*string;
 
 	output_size = 0;
 	string = va_arg(*ap, char*);
 	if (!string)
-		return(write(1, "(null)", 6));
+		return (write(1, "(null)", 6));
 	if (fmt.sign_minus == 1)
 	{
 		output_size += write_value(fmt, string);
