@@ -24,6 +24,7 @@ static t_format		set_default(void)
 	fmt.width = -999;
 	fmt.precision = -1;
 	fmt.len = 0;
+	fmt.type = ';';
 	return (fmt);
 }
 
@@ -140,12 +141,13 @@ int					set_format(const char *format, int i,
 			i = set_width_or_prec(format, i + 1, fmt, 2);
 		if (format[i] >= 49 && format[i] <= 57)
 			i = set_width_or_prec(format, i, fmt, 1);
-		if (format[i] == ft_strlen(format))
-		    exit(0);
+		if (format[i] == '\0')
+			break ;
 		if (prev == i)
 			i++;
 		prev = i;
 	}
-	fmt->type = format[i];
+	if (format[i] != '\0')
+		fmt->type = format[i];
 	return (++i);
 }

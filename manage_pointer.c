@@ -21,8 +21,7 @@ static char 	*pointer_to_str(void *p)
 	buf[14] = '\0';
 	buf[0] = '0';
 	buf[1] = 'x';
-	buf[2] = '0';
-	for (int * j = p , k = 13 ; j ; j = (void*)(((size_t)j) >> 4) , -- k)
+	for (int *j = p , k = 13 ; j ; j = (void*)(((size_t)j) >> 4) , --k)
 	{
 		dig = ((size_t) j) % 0x10;
 		if (dig < 10)
@@ -46,7 +45,11 @@ static int			write_value(t_format fmt, char *string, void *p)
 	{
 		output_size += write(1, &string[0], 1);
 		output_size += write(1, &string[1], 1);
-		output_size += write(1, &string[2], 1);
+		while ((fmt.precision != 0 && fmt.precision >= 1) || fmt.precision == -1)
+		{
+			output_size += write(1, "0", 1);
+			fmt.precision--;
+		}
 	}
 	else
 		output_size += write(1, string, 14);

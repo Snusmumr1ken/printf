@@ -18,7 +18,7 @@
 # include <limits.h>
 # include <inttypes.h>
 # include <locale.h>
-
+# include <stdio.h>
 typedef enum	e_len
 {
 	none,
