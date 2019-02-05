@@ -13,7 +13,7 @@ SRC		=   work_with_unicode.c ft_printf.c \
             manage_pointer.c manage_decimal.c \
             manage_unsigned.c manage_octal.c \
             manage_binary.c manage_hex.c \
-            manage_percent.c ftoa.c
+            manage_percent.c manage_float.c ftoa.c
 
 OBJ		= $(SRC:.c=.o)
 

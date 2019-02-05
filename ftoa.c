@@ -11,65 +11,92 @@
 /* ************************************************************************** */
 
 #include "libp.h"
-
-static double		pow(double num, double times)
+static char 		*strjoin(char *str1, char *str2)
 {
-	int		i;
-	double	n;
+	char		*result;
+	int			i;
+	int			j;
 
+	result = (char*)malloc(ft_strlen(str1) + ft_strlen(str2) + 1);
+	result[ft_strlen(str1) + ft_strlen(str2)] = '\0';
 	i = -1;
-	n = num;
-	while (++i < times - 1)
-		n *= num;
-	return (n);
-}
-
-static void			reverse(char *str, int len)
-{
-	int i;
-	int j;
-	int temp;
-
-	i = 0;
-	j = len - 1;
-	while (i < j)
+	while (str1[++i])
+		result[i] = str1[i];
+	j = -1;
+	while (str2[++j])
 	{
-		temp = str[i];
-		str[i] = str[j];
-		str[j] = temp;
+		result[i] = str2[j];
 		i++;
-		j--;
 	}
+	return (result);
+}
+static void			round_double(long double *number, int precision)
+{
+	long double				rounder;
+	unsigned long long		int_part;
+	int 					i;
+	long double				temp;
+
+	rounder = 0.1;
+	i = 0;
+	temp = (*number < 0) ? -*number : *number;
+	int_part = (unsigned long long)temp;
+	temp -= (long double)int_part;
+	while (i <= precision)
+	{
+		temp *= 10;
+		int_part = (unsigned long long)temp;
+		temp -= (long double)int_part;
+		i++;
+	}
+	while (precision--)
+		rounder /= 10;
+	if (int_part >= 5)
+		*number = (number < 0) ? (*number - rounder * 10) : (*number + rounder * 10);
 }
 
-static int			intToStr(int x, char str[], int d)
+static char 		*get_after_dot(long double number, int precision)
 {
-	int i = 0;
-	while (x)
+	char 					*result;
+	unsigned long long		int_part;
+	int 					i;
+	int 					temp;
+
+	result = (char*)malloc(precision + 1);
+	result[precision] = '\0';
+	int_part = (unsigned long long)number;
+	number -= (long double)int_part;
+	i = 0;
+	while (i < precision)
 	{
-		str[i++] = (x % 10) + '0';
-		x = x / 10;
+		number *= 10;
+		temp = (int)number;
+		result[i] = temp + 48;
+		i++;
+		number -= (long double)temp;
 	}
-	while (i < d)
-		str[i++] = '0';
-	reverse(str, i);
-	str[i] = '\0';
-	return (i);
+	return (result);
 }
 
-void				ftoa(float n, char *res, int afterpoint)
+char				*ftoa(long double number, int precision)
 {
-	int		ipart;
-	float	fpart;
-	int 	i;
+	char				*result;
+	char 				*before_dot;
+	char 				*after_dot;
+	int 				minus;
 
-	ipart = (int)n;
-	fpart = n - (float)ipart;
-	i = intToStr(ipart, res, 0);
-	if (afterpoint != 0)
-	{
-		res[i] = '.';
-		fpart = fpart * pow(10, afterpoint);
-		intToStr((int)fpart, res + i + 1, afterpoint);
-	}
+	precision = precision + 1 - 1;
+	round_double(&number, precision);
+	minus = (number < 0) ? 1 : 0;
+	number = (number < 0) ? -number : number;
+	before_dot = (minus) ?
+			strjoin("-", ft_itoa_base_unsigned((unsigned long long)number, 10)) :
+			ft_itoa_base_unsigned((unsigned long long)number, 10);
+	if (precision == 0)
+		return (before_dot);
+	after_dot = strjoin(".", get_after_dot(number, precision));
+	result = strjoin(before_dot, after_dot);
+	free(before_dot);
+	free(after_dot);
+	return (result);
 }

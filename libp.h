@@ -72,6 +72,6 @@ int				ft_atoi(const char *str);
 char			*ft_itoa_base_signed(long long value, int base);
 char			*ft_itoa_base_unsigned(unsigned long long value,
 												int base);
-void			ftoa(float n, char *res, int afterpoint);
+char 			*ftoa(long double number, int precision);
 
 #endif

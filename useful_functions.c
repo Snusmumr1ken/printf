@@ -54,7 +54,7 @@ int			what_to_manage(t_format fmt, va_list *ap)
 	if (fmt.type == 'x' || fmt.type == 'X')
 		output_size = manage_hex(fmt, ap);
 	if (fmt.type == 'f' || fmt.type == 'F')
-		output_size = write(1, "p", 1);
+		output_size = manage_float(fmt, ap);
 	return (output_size);
 }
 
