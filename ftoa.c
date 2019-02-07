@@ -11,7 +11,8 @@
 /* ************************************************************************** */
 
 #include "libp.h"
-static char 		*strjoin(char *str1, char *str2)
+
+static char			*strjoin(char *str1, char *str2)
 {
 	char		*result;
 	int			i;
@@ -30,11 +31,12 @@ static char 		*strjoin(char *str1, char *str2)
 	}
 	return (result);
 }
+
 static void			round_double(long double *number, int precision)
 {
 	long double				rounder;
 	unsigned long long		int_part;
-	int 					i;
+	int						i;
 	long double				temp;
 
 	rounder = 0.1;
@@ -52,15 +54,16 @@ static void			round_double(long double *number, int precision)
 	while (precision--)
 		rounder /= 10;
 	if (int_part >= 5)
-		*number = (number < 0) ? (*number - rounder * 10) : (*number + rounder * 10);
+		*number = (number < 0) ? (*number - rounder * 10) :
+				(*number + rounder * 10);
 }
 
-static char 		*get_after_dot(long double number, int precision)
+static char			*get_after_dot(long double number, int precision)
 {
-	char 					*result;
+	char					*result;
 	unsigned long long		int_part;
-	int 					i;
-	int 					temp;
+	int						i;
+	int						temp;
 
 	result = (char*)malloc(precision + 1);
 	result[precision] = '\0';
@@ -81,17 +84,17 @@ static char 		*get_after_dot(long double number, int precision)
 char				*ftoa(long double number, int precision)
 {
 	char				*result;
-	char 				*before_dot;
-	char 				*after_dot;
-	int 				minus;
+	char				*before_dot;
+	char				*after_dot;
+	int					minus;
 
 	precision = precision + 1 - 1;
 	round_double(&number, precision);
 	minus = (number < 0) ? 1 : 0;
 	number = (number < 0) ? -number : number;
 	before_dot = (minus) ?
-			strjoin("-", ft_itoa_base_unsigned((unsigned long long)number, 10)) :
-			ft_itoa_base_unsigned((unsigned long long)number, 10);
+		strjoin("-", ft_itoa_base_unsigned((unsigned long long)number, 10)) :
+		ft_itoa_base_unsigned((unsigned long long)number, 10);
 	if (precision == 0)
 		return (before_dot);
 	after_dot = strjoin(".", get_after_dot(number, precision));

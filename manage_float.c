@@ -77,7 +77,7 @@ int					manage_float(t_format fmt, va_list *ap)
 {
 	int				output_size;
 	long double		number;
-	char 			*string;
+	char			*string;
 
 	fmt.precision = (fmt.precision == -1) ? (6) : (fmt.precision);
 	number = (fmt.len == L) ? va_arg(*ap, long double) : va_arg(*ap, double);

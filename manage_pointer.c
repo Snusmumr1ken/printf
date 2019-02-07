@@ -40,7 +40,7 @@ static void		pointer_to_array(int buf[], void *p)
 static int		write_value(t_format fmt, int buf[], void *p)
 {
 	int				output_size;
-	int 			dig;
+	int				dig;
 
 	output_size = 0;
 	if (fmt.sign_plus == 1)
@@ -97,7 +97,7 @@ int				manage_pointer(t_format fmt, va_list *ap)
 {
 	void	*p;
 	int		output_size;
-	int 	buf[15];
+	int		buf[15];
 
 	output_size = 0;
 	p = va_arg(*ap, void*);

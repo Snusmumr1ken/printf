@@ -7,7 +7,7 @@
 
 ##########           Varaibles              ##########
 #                                                    #
-SRC		=   work_with_unicode.c ft_printf.c \
+SRC		=   ft_printf.c \
             useful_functions.c work_with_format.c \
             manage_char.c manage_string.c \
             manage_pointer.c manage_decimal.c \

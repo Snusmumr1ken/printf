@@ -44,34 +44,33 @@ static int			set_width_or_prec(const char *str, int pos, t_format *fmt,
 	return (pos);
 }
 
-static int			check_and_set_sign(char c, t_format *fmt)
+static void			check_and_set_sign(char c, t_format *fmt, int *i)
 {
 	if (c == '0')
 	{
 		fmt->sign_null = 1;
-		return (1);
+		*i += 1;
 	}
 	if (c == '-')
 	{
 		fmt->sign_minus = 1;
-		return (1);
+		*i += 1;
 	}
 	if (c == '+')
 	{
 		fmt->sign_plus = 1;
-		return (1);
+		*i += 1;
 	}
 	if (c == '#')
 	{
 		fmt->sign_hash = 1;
-		return (1);
+		*i += 1;
 	}
 	if (c == ' ')
 	{
 		fmt->sign_space = 1;
-		return (1);
+		*i += 1;
 	}
-	return (0);
 }
 
 static int			check_and_set_len(const char *str,
@@ -128,7 +127,7 @@ int					set_format(const char *format, int i,
 			fmt->width = va_arg(*ap, int);
 			i++;
 		}
-		i += check_and_set_sign(format[i], fmt);
+		check_and_set_sign(format[i], fmt, &i);
 		i += check_and_set_len(format, i, fmt);
 		if (format[i] == '.' && format[i + 1] == '*')
 		{
