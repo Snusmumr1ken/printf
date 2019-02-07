@@ -12,17 +12,17 @@
 
 #include "libp.h"
 
-static char		*pointer_to_str(void *p)
+static void		pointer_to_array(int buf[], void *p)
 {
 	unsigned int	dig;
-	char			*buf;
 	int				*j;
 	int				k;
 
-	buf = (char*)malloc(15);
-	buf[14] = '\0';
 	buf[0] = '0';
 	buf[1] = 'x';
+	dig = 1;
+	while (++dig < 15)
+		buf[dig] = '0';
 	j = p;
 	k = 13;
 	while (j)
@@ -35,41 +35,54 @@ static char		*pointer_to_str(void *p)
 		j = (void*)(((size_t)j) >> 4);
 		--k;
 	}
-	return (buf);
 }
 
-static int		write_value(t_format fmt, char *string, void *p)
+static int		write_value(t_format fmt, int buf[], void *p)
 {
-	int output_size;
+	int				output_size;
+	int 			dig;
 
 	output_size = 0;
 	if (fmt.sign_plus == 1)
 		output_size += write(1, "+", 1);
 	if (fmt.sign_space == 1 && fmt.sign_plus != 1)
 		output_size += write(1, " ", 1);
-	if (p == 0)
-	{
-		output_size += write(1, &string[0], 1);
-		output_size += write(1, &string[1], 1);
-		while ((fmt.precision != 0 && fmt.precision >= 1)
-		|| fmt.precision == -1)
-		{
-			output_size += write(1, "0", 1);
-			fmt.precision--;
-		}
-	}
-	else
-		output_size += write(1, string, 14);
+	output_size += write(1, &buf[0], 1);
+	output_size += write(1, &buf[1], 1);
+	dig = 2;
+	output_size += (p == 0) ? write(1, "0", 1) : 0;
+	while (buf[dig] == '0' && p != 0)
+		dig++;
+	while (dig < 14 && p != 0)
+		output_size += write(1, &buf[dig++], 1);
 	return (output_size);
 }
 
-static int		write_padding(t_format fmt, char *string)
+static int		get_current_size(int buf[])
+{
+	int		size;
+	int		i;
+
+	i = 2;
+	size = 2;
+	while (buf[i] == '0')
+		i++;
+	while (i < 14)
+	{
+		size++;
+		i++;
+	}
+	return (size);
+}
+
+static int		write_padding(t_format fmt, int buf[], void *p)
 {
 	int output_size;
 	int str_len;
 
-	str_len = (fmt.sign_plus == 1 || fmt.sign_space == 1) ?
-			(ft_strlen(string) + 1) : (ft_strlen(string));
+	str_len = get_current_size(buf);
+	str_len += (p == 0) ? 1 : 0;
+	str_len += (fmt.sign_plus == 1 || fmt.sign_space == 1) ? 1 : 0;
 	output_size = 0;
 	while (output_size < fmt.width - str_len)
 	{
@@ -82,23 +95,22 @@ static int		write_padding(t_format fmt, char *string)
 
 int				manage_pointer(t_format fmt, va_list *ap)
 {
-	char	*buf;
 	void	*p;
 	int		output_size;
+	int 	buf[15];
 
 	output_size = 0;
 	p = va_arg(*ap, void*);
-	buf = pointer_to_str(p);
+	pointer_to_array(buf, p);
 	if (fmt.sign_minus == 1)
 	{
 		output_size += write_value(fmt, buf, p);
-		output_size += write_padding(fmt, buf);
+		output_size += write_padding(fmt, buf, p);
 	}
 	if (fmt.sign_minus == 0)
 	{
-		output_size += write_padding(fmt, buf);
+		output_size += write_padding(fmt, buf, p);
 		output_size += write_value(fmt, buf, p);
 	}
-	free(buf);
 	return (output_size);
 }
