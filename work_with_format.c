@@ -73,44 +73,25 @@ static void			check_and_set_sign(char c, t_format *fmt, int *i)
 	}
 }
 
-static int			check_and_set_len(const char *str,
-									int i, t_format *fmt)
+static void			check_all(const char *format, int *i,
+		t_format *fmt, va_list *ap)
 {
-	if (str[i] == 'h' && str[i + 1] == 'h')
+	if (format[*i] == '*')
 	{
-		fmt->len = hh;
-		return (2);
+		fmt->width = va_arg(*ap, int);
+		*i += 1;
 	}
-	if (str[i] == 'l' && str[i + 1] == 'l')
+	check_and_set_sign(format[*i], fmt, i);
+	check_and_set_len(format, i, fmt);
+	if (format[*i] == '.' && format[*i + 1] == '*')
 	{
-		fmt->len = ll;
-		return (2);
+		fmt->precision = va_arg(*ap, int);
+		*i += 2;
 	}
-	if (str[i] == 'h')
-	{
-		fmt->len = h;
-		return (1);
-	}
-	if (str[i] == 'j')
-	{
-		fmt->len = j;
-	}
-	if (str[i] == 'l')
-	{
-		fmt->len = l;
-		return (1);
-	}
-	if (str[i] == 'L')
-	{
-		fmt->len = L;
-		return (1);
-	}
-	if (str[i] == 'z')
-	{
-		fmt->len = z;
-		return (1);
-	}
-	return (0);
+	if (format[*i] == '.')
+		*i = set_width_or_prec(format, *i + 1, fmt, 2);
+	if (format[*i] >= 49 && format[*i] <= 57)
+		*i = set_width_or_prec(format, *i, fmt, 1);
 }
 
 int					set_format(const char *format, int i,
@@ -122,22 +103,7 @@ int					set_format(const char *format, int i,
 	prev = i;
 	while (is_type(format[i]) == 0)
 	{
-		if (format[i] == '*')
-		{
-			fmt->width = va_arg(*ap, int);
-			i++;
-		}
-		check_and_set_sign(format[i], fmt, &i);
-		i += check_and_set_len(format, i, fmt);
-		if (format[i] == '.' && format[i + 1] == '*')
-		{
-			fmt->precision = va_arg(*ap, int);
-			i += 2;
-		}
-		if (format[i] == '.')
-			i = set_width_or_prec(format, i + 1, fmt, 2);
-		if (format[i] >= 49 && format[i] <= 57)
-			i = set_width_or_prec(format, i, fmt, 1);
+		check_all(format, &i, fmt, ap);
 		if (format[i] == '\0')
 			break ;
 		if (prev == i)

@@ -12,12 +12,12 @@
 
 #include "libp.h"
 
-static int			write_prefix(t_format fmt, unsigned long long num)
+static int			write_prefix(t_format fmt)
 {
 	int output_size;
 
 	output_size = 0;
-	if (fmt.sign_hash == 1 && num != 0)
+	if (fmt.sign_hash == 1)
 		output_size += write(1, "0", 1);
 	return (output_size);
 }
@@ -56,8 +56,7 @@ static int			write_padding(t_format fmt, char *string)
 	return (output_size);
 }
 
-static int			actual_output(t_format fmt, char *string,
-		unsigned long long num)
+static int			actual_output(t_format fmt, char *string)
 {
 	int output_size;
 
@@ -65,15 +64,15 @@ static int			actual_output(t_format fmt, char *string,
 	if (fmt.sign_minus == 0)
 	{
 		if (fmt.sign_null == 1)
-			output_size += write_prefix(fmt, num);
+			output_size += write_prefix(fmt);
 		output_size += write_padding(fmt, string);
 		if (fmt.sign_null == 0)
-			output_size += write_prefix(fmt, num);
+			output_size += write_prefix(fmt);
 		output_size += write_value(fmt, string);
 	}
 	else
 	{
-		output_size += write_prefix(fmt, num);
+		output_size += write_prefix(fmt);
 		output_size += write_value(fmt, string);
 		output_size += write_padding(fmt, string);
 	}
@@ -97,5 +96,5 @@ int					manage_octal(t_format fmt, va_list *ap)
 	else
 		num = va_arg(*ap, unsigned);
 	string = ft_itoa_base_unsigned(num, 8);
-	return (actual_output(fmt, string, num));
+	return (actual_output(fmt, string));
 }

@@ -73,5 +73,7 @@ char			*ft_itoa_base_signed(long long value, int base);
 char			*ft_itoa_base_unsigned(unsigned long long value,
 												int base);
 char			*ftoa(long double number, int precision);
+void			check_and_set_len(const char *str,
+		int *i, t_format *fmt);
 
 #endif
