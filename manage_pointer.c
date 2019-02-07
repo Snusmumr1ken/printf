@@ -50,7 +50,7 @@ static int		write_value(t_format fmt, int buf[], void *p)
 	output_size += write(1, &buf[0], 1);
 	output_size += write(1, &buf[1], 1);
 	dig = 2;
-	output_size += (p == 0) ? write(1, "0", 1) : 0;
+	output_size += (p == 0 && fmt.precision != 0) ? write(1, "0", 1) : 0;
 	while (buf[dig] == '0' && p != 0)
 		dig++;
 	while (dig < 14 && p != 0)
