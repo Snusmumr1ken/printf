@@ -54,7 +54,7 @@ static void			round_double(long double *number, int precision)
 	while (precision--)
 		rounder /= 10;
 	if (int_part >= 5)
-		*number = (number < 0) ? (*number - rounder * 10) :
+		*number = (*number < 0) ? (*number - rounder * 10) :
 				(*number + rounder * 10);
 }
 
